@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ScoreController : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _scoreText;
+    [SerializeField] private TMP_Text _scoreText;
 
     [SerializeField] private GameController _gameController;
 
@@ -20,8 +20,5 @@ public class ScoreController : MonoBehaviour
         _scoreText.text = "Score: " + _score;
     }
 
-    public TextMeshProUGUI ReturnScoreText()
-    {
-        return _scoreText;
-    }
+    public TMP_Text ScoreText =>_scoreText;
 }

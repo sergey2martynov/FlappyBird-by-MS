@@ -7,14 +7,19 @@ public class GameOverTextController : MonoBehaviour
 
     [SerializeField] private GameObject _scoreResult;
 
-    [SerializeField] private TextMeshProUGUI _scoreTextResult;
+    [SerializeField] private TMP_Text _scoreTextResult;
 
     [SerializeField] private ScoreController _scoreController;
 
     public void ShowGameOverText()
     {
-        _scoreTextResult.text = _scoreController.ReturnScoreText().text;
-        _gameOverText.SetActive(true);
-        _scoreResult.SetActive(true);
+        _scoreTextResult.text = _scoreController.ScoreText.text;
+        SetGameOverTextActive(true);
+    }
+
+    private void SetGameOverTextActive(bool isActive)
+    {
+        _gameOverText.SetActive(isActive);
+        _scoreResult.SetActive(isActive);
     }
 }

@@ -10,30 +10,28 @@ public class ColumnMovement : MonoBehaviour
 
     private const float Speed = -1.5f;
 
+    private Vector2 _columnMotionVector;
+
     private void Start()
     {
-        _rigidbody.velocity = new Vector2(Speed, 0);
+        _columnMotionVector = new Vector2(Speed, 0);
     }
 
     private void Update()
     {
-        if (_gameController.IsGameOver || _pauseController.IsPause)
+        if (_gameController.CheckTheEndOfTheGame() || _pauseController.СheckIfTheGameIsPaused())
         {
             _rigidbody.velocity = Vector2.zero;
         }
         else
         {
-            _rigidbody.velocity = new Vector2(Speed, 0);
+            _rigidbody.ChangeTheSpeed(_columnMotionVector);
         }
     }
 
-    public void SendAGameControllerReference(GameController gameController)
+    public void Inject(GameController gameController, PauseController pauseController)
     {
         _gameController = gameController;
-    }
-
-    public void SendAPauseControllerReference(PauseController pauseController)
-    {
         _pauseController = pauseController;
     }
 }

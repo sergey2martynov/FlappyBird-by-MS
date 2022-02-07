@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    public bool IsGameOver { get; set; }
+    public bool IsGameOver { get; set; } = false;
 
-    private void Start()
+    public bool CheckTheEndOfTheGame ()
     {
-        IsGameOver = false;
+        return IsGameOver;
     }
 }

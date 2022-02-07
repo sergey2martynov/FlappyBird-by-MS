@@ -5,28 +5,33 @@ public class PauseController : MonoBehaviour
 {
     [SerializeField] private InputManager _inputManager;
 
-    public bool IsPause { get; set; }
+    public bool IsPause { get; set; } = false;
 
-    public event Action PauseIsTrue;
+    public event Action GameIsPaused;
 
-    public event Action PauseIsFalse;
+    public event Action GameIsUnpaused;
 
     private void Start()
     {
         _inputManager.EscapePressed += TakeAPause;
     }
 
-    public void TakeAPause()
+    private void TakeAPause()
     {
         IsPause = !IsPause;
         if (IsPause)
         {
-            PauseIsTrue?.Invoke();
+            GameIsPaused?.Invoke();
         }
 
-        if (IsPause == false)
+        if (!IsPause)
         {
-            PauseIsFalse?.Invoke();
+            GameIsUnpaused?.Invoke();
         }
+    }
+
+    public bool СheckIfTheGameIsPaused()
+    {
+        return IsPause;
     }
 }

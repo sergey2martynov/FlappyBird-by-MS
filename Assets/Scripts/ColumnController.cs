@@ -3,13 +3,19 @@ using UnityEngine;
 
 public class ColumnController : MonoBehaviour
 {
-    public event Action GettingAPoint;
+    [SerializeField] private GameObject _column;
+    public event Action TheBirdFlewThroughTheHole;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.GetComponent<BirdController>() != null)
+        if (other.gameObject.name == "Bird")
         {
-            GettingAPoint?.Invoke();
+            TheBirdFlewThroughTheHole?.Invoke();
         }
+    }
+
+    public void SetPosition(float spawnXPosition, float spawnYPosition)
+    {
+        _column.transform.position = new Vector2(spawnXPosition, spawnYPosition);
     }
 }
