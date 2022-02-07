@@ -32,11 +32,6 @@ public class PauseController : MonoBehaviour
 
     public bool СheckIfTheGameIsPaused()
     {
-        if (IsPause)
-        {
-            return true;
-        }
-
-        return false;
+        return IsPause;
     }
 }

@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameOver : MonoBehaviour
 {
-    [SerializeField] private BirdCollisionDetectorWithColumn _birdCollisionDetectorWithColumn;
+    [SerializeField] private BirdCollisionWithColumnDetector _birdCollisionDetectorWithColumn;
 
     [SerializeField] private Rigidbody2D _rigidbody2D;
 
@@ -14,7 +15,7 @@ public class GameOver : MonoBehaviour
 
     private void Start()
     {
-        _birdCollisionDetectorWithColumn.СollisionOfABirdWithColumns += FinishTheGame;
+        _birdCollisionDetectorWithColumn.BirdCollidedWithColumn += FinishTheGame;
     }
 
     private void FinishTheGame()
@@ -22,5 +23,10 @@ public class GameOver : MonoBehaviour
         _rigidbody2D.velocity = Vector2.zero;
         _gameController.IsGameOver = true;
         _gameOverTextController.ShowGameOverText();
+    }
+
+    private void OnDestroy()
+    {
+        _birdCollisionDetectorWithColumn.BirdCollidedWithColumn -= FinishTheGame;
     }
 }

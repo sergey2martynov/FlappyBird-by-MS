@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class ColumnMovement : MonoBehaviour
@@ -20,10 +19,14 @@ public class ColumnMovement : MonoBehaviour
 
     private void Update()
     {
-        MoveTheObject(_gameController, _pauseController, _rigidbody,
-            _columnMotionVector);
-        
-        
+        if (_gameController.CheckTheEndOfTheGame() || _pauseController.СheckIfTheGameIsPaused())
+        {
+            _rigidbody.velocity = Vector2.zero;
+        }
+        else
+        {
+            _rigidbody.ChangeTheSpeed(_columnMotionVector);
+        }
     }
 
     public void Inject(GameController gameController, PauseController pauseController)
@@ -31,18 +34,4 @@ public class ColumnMovement : MonoBehaviour
         _gameController = gameController;
         _pauseController = pauseController;
     }
-    
-    public void MoveTheObject(GameController gameController, PauseController pauseController, Rigidbody2D rb2D, Vector2 vector2)
-    {
-        if (gameController.CheckTheEndOfTheGame() || pauseController.СheckIfTheGameIsPaused())
-        {
-            rb2D.velocity = Vector2.zero;
-        }
-        else
-        {
-            rb2D.velocity = vector2;
-        }
-    }
-    
-    
 }

@@ -19,7 +19,7 @@ public class BirdJumper : MonoBehaviour
     
     private static readonly int Flap = Animator.StringToHash("Flap");
 
-    private void Start()
+    private void Awake()
     {
         _jumpVector = new Vector2(0, _jumpForce);
         

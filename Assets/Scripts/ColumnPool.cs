@@ -43,7 +43,10 @@ public class ColumnPool : MonoBehaviour
 
     private void Update()
     {
-        _timeSienceLastSpawned += Time.deltaTime;
+        if (!_pauseController.СheckIfTheGameIsPaused())
+        {
+            _timeSienceLastSpawned += Time.deltaTime;
+        }
 
         if (!_gameController.IsGameOver && _timeSienceLastSpawned >= _spawnRate)
         {

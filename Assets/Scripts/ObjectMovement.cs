@@ -7,8 +7,6 @@ public class ObjectMovement : MonoBehaviour
     [SerializeField] private GameController _gameController;
 
     [SerializeField] private PauseController _pauseController;
-
-    [SerializeField] private ColumnMovement _columnMovement;
     
     [SerializeField] private float _backgroundVanishingPoint = -8.74f;
 
@@ -25,7 +23,14 @@ public class ObjectMovement : MonoBehaviour
 
     private void Update()
     {
-        _columnMovement.MoveTheObject(_gameController, _pauseController,_rigidbody,_objectMotionVector);
+        if (_gameController.CheckTheEndOfTheGame() || _pauseController.СheckIfTheGameIsPaused())
+        {
+            _rigidbody.velocity = Vector2.zero;
+        }
+        else
+        {
+            _rigidbody.ChangeTheSpeed(_objectMotionVector);
+        }
         
         if (transform.position.x < _backgroundVanishingPoint)
         {

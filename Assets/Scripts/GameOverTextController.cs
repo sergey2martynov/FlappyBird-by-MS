@@ -13,7 +13,7 @@ public class GameOverTextController : MonoBehaviour
 
     public void ShowGameOverText()
     {
-        _scoreTextResult.text = _scoreController.ReturnScoreText.text;
+        _scoreTextResult.text = _scoreController.ScoreText.text;
         SetGameOverTextActive(true);
     }
 

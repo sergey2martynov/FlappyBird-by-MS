@@ -6,10 +6,6 @@ public class GameController : MonoBehaviour
 
     public bool CheckTheEndOfTheGame ()
     {
-        if (IsGameOver)
-        {
-            return true;
-        }
-        return false;
+        return IsGameOver;
     }
 }

@@ -20,5 +20,5 @@ public class ScoreController : MonoBehaviour
         _scoreText.text = "Score: " + _score;
     }
 
-    public TMP_Text ReturnScoreText =>_scoreText;
+    public TMP_Text ScoreText =>_scoreText;
 }
