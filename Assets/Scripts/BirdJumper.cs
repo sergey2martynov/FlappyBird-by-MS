@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class BirdJumper : MonoBehaviour
@@ -6,19 +7,37 @@ public class BirdJumper : MonoBehaviour
 
     [SerializeField] private PauseController _pauseController;
 
+    [SerializeField] private InputManager _inputManager;
+
     [SerializeField] private Rigidbody2D _rigidbody2D;
 
     [SerializeField] private Animator _animator;
 
-    private const float UpForce = 150.0f;
+    [SerializeField] private float _jumpForce = 150f;
+    
+    private Vector2 _jumpVector;
+    
+    private static readonly int Flap = Animator.StringToHash("Flap");
 
-    public void Jump()
+    private void Start()
     {
-        if (_gameController.IsGameOver == false && _pauseController.IsPause == false)
+        _jumpVector = new Vector2(0, _jumpForce);
+        
+        _inputManager.SpacePressed += Jump;
+    }
+
+    private void Jump()
+    {
+        if (!_gameController.IsGameOver && !_pauseController.IsPause)
         {
             _rigidbody2D.velocity = Vector2.zero;
-            _rigidbody2D.AddForce(new Vector2(0, UpForce));
-            _animator.SetTrigger("Flap");
+            _rigidbody2D.AddForce(_jumpVector);
+            _animator.SetTrigger(Flap);
         }
+    }
+
+    private void OnDestroy()
+    {
+        _inputManager.SpacePressed -= Jump;
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ColumnMovement : MonoBehaviour
@@ -10,30 +11,38 @@ public class ColumnMovement : MonoBehaviour
 
     private const float Speed = -1.5f;
 
+    private Vector2 _columnMotionVector;
+
     private void Start()
     {
-        _rigidbody.velocity = new Vector2(Speed, 0);
+        _columnMotionVector = new Vector2(Speed, 0);
     }
 
     private void Update()
     {
-        if (_gameController.IsGameOver || _pauseController.IsPause)
+        MoveTheObject(_gameController, _pauseController, _rigidbody,
+            _columnMotionVector);
+        
+        
+    }
+
+    public void Inject(GameController gameController, PauseController pauseController)
+    {
+        _gameController = gameController;
+        _pauseController = pauseController;
+    }
+    
+    public void MoveTheObject(GameController gameController, PauseController pauseController, Rigidbody2D rb2D, Vector2 vector2)
+    {
+        if (gameController.CheckTheEndOfTheGame() || pauseController.СheckIfTheGameIsPaused())
         {
-            _rigidbody.velocity = Vector2.zero;
+            rb2D.velocity = Vector2.zero;
         }
         else
         {
-            _rigidbody.velocity = new Vector2(Speed, 0);
+            rb2D.velocity = vector2;
         }
     }
-
-    public void SendAGameControllerReference(GameController gameController)
-    {
-        _gameController = gameController;
-    }
-
-    public void SendAPauseControllerReference(PauseController pauseController)
-    {
-        _pauseController = pauseController;
-    }
+    
+    
 }
